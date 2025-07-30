@@ -1,6 +1,0 @@
-@KitchenEquipmentManagementAppApi_HostAddress = http://localhost:5211
-
-GET {{KitchenEquipmentManagementAppApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
