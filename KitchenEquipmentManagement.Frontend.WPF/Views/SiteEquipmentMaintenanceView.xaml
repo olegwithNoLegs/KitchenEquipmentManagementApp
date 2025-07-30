@@ -1,0 +1,71 @@
+﻿
+<Window x:Class="KitchenEquipmentManagement.Frontend.WPF.Views.SiteEquipmentMaintenanceView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KitchenEquipmentManagement.Frontend.WPF.Views"
+        mc:Ignorable="d"
+        Height="600" Width="800"
+        Title="{Binding SiteDescription, StringFormat=Equipment Registration for Site {0}}">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Header -->
+            <RowDefinition Height="*"/>
+            <!-- Unregistered Table -->
+            <RowDefinition Height="Auto"/>
+            <!-- Buttons -->
+            <RowDefinition Height="Auto"/>
+            <!-- Registered Header -->
+            <RowDefinition Height="*"/>
+            <!-- Registered Table -->
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Text="Unregistered Equipments"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   Margin="0 0 0 5" />
+
+        <!-- Unregistered Equipments Table -->
+        <DataGrid Grid.Row="1"
+                  ItemsSource="{Binding UnregisteredEquipments}"
+                  SelectedItem="{Binding SelectedEquipmentToRegister}"
+                  AutoGenerateColumns="False"
+                  Margin="0 0 0 10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding EquipmentId}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Serial Number" Binding="{Binding SerialNumber}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Condition" Binding="{Binding Condition}" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10">
+            <Button Content="Register" Command="{Binding RegisterEquipmentCommand}" Margin="5"/>
+            <Button Content="Unregister" Command="{Binding UnregisterEquipmentCommand}" Margin="5"/>
+        </StackPanel>
+
+        <!-- Registered Header -->
+        <TextBlock Grid.Row="3"
+                   Text="Registered Equipments"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   Margin="0 10 0 5" />
+
+        <!-- Registered Equipments Table -->
+        <DataGrid Grid.Row="4"
+                  ItemsSource="{Binding RegisteredEquipments}"
+                  SelectedItem="{Binding SelectedEquipmentToUnregister}"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding EquipmentId}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Serial Number" Binding="{Binding SerialNumber}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Condition" Binding="{Binding Condition}" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

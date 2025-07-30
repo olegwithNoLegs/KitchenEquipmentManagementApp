@@ -1,0 +1,42 @@
+﻿<!-- EquipmentMaintenanceView.xaml -->
+<Window x:Class="KitchenEquipmentManagement.Frontend.WPF.Views.EquipmentMaintenanceView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KitchenEquipmentManagement.Frontend.WPF.Views"
+        mc:Ignorable="d"
+        Title="Equipment Maintenance" Height="300" Width="400">
+    <Grid>
+        <DataGrid ItemsSource="{Binding EquipmentDtos}"
+                  SelectedItem="{Binding SelectedEquipment}"
+                AutoGenerateColumns="False"
+                Grid.Row="0"
+                Margin="0 0 0 10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding EquipmentId}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Serial Number" Binding="{Binding SerialNumber}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                <DataGridTemplateColumn Header="Role" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Condition}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding DataContext.EquipmentConditions, RelativeSource={RelativeSource AncestorType=Window}}"
+                             SelectedItem="{Binding Condition, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
+            <Button Content="Add" Command="{Binding AddCommand}" Margin="5"/>
+            <Button Content="Edit" Command="{Binding EditCommand}" Margin="5"/>
+            <Button Content="Delete" Command="{Binding DeleteCommand}" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>
